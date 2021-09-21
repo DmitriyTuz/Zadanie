@@ -7,7 +7,7 @@ const homeRouter = require("./routes/homeRouter.js");
 const bookRouter = require("./routes/bookRouter.js");
 const autorRouter = require("./routes/autorRouter.js");
 
-const wrongRoute = require("./routes/userRouter1.js");
+const wrongRoute = require("./middleware/wrongRouter.js");
 
 const db = require("./models/db");
 
@@ -34,7 +34,7 @@ console.log(2);
 console.log(3);
 
 // синхронизация с бд, после успшной синхронизации запускаем сервер
-db.sequelize.sync({force:true}).then(() => {
+db.sequelize.sync().then(() => {
   app.listen(port, function(){
     console.log(`Сервер ожидает подключения на порту ${port}`);
   });

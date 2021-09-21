@@ -187,13 +187,22 @@ exports.successAuth = (req, res) => {
     res.status(200).send("Welcome 🙌 ");
 };
 
-exports.wrongRoute = (req, res) => {
-    res.status(404).json({
-        success: "false",
-        message: "Page not found",
-        error: {
-            statusCode: 404,
-            message: "You reached a route that is not defined on this server",
-        },
-    });
+exports.getUserByFirstName = (req, res) => {
+   // db.sequelize.query(`SELECT id, first_name, last_name FROM users WHERE first_name = 'Alexandr' AND last_name = 'Poliv'`,
+   // db.sequelize.query(`SELECT id, first_name, last_name FROM users WHERE id = ${req.query.id}`,
+    db.sequelize.query(`SELECT id, first_name, last_name FROM users WHERE first_name = ${req.query.first_name} AND last_name = ${req.query.last_name} AND name IS NULL`,
+   //    db.sequelize.query(`SELECT id, first_name, last_name FROM users WHERE first_name LIKE "Al%" AND last_name LIKE "Polivan%"`,
+        function(err, results, fields) {
+            console.log(err);
+            console.log(results); // собственно данные
+            console.log(fields); // мета-данные полей
+        }).then(results => res.send(results));
 };
+
+    // db.user.findAll({
+    //     where: {
+    //         first_name: req.query.first_name,
+    //         last_name: req.query.last_name
+    //     }
+    // }).then(user => res.send(user));
+// };

@@ -14,7 +14,7 @@ const User = sequelize.define("user", {
   },
   first_name: {
     type: DateTypes.STRING,
-    default: null
+//    default: null
   },
   last_name: {
     type: DateTypes.STRING,
