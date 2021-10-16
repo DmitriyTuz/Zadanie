@@ -8,4 +8,7 @@ bookRouter.get("/find/:id", bookController.getBookWithId);
 bookRouter.delete("/delete/:id", bookController.deleteBook);
 bookRouter.put("/edit", bookController.editBook);
 
+bookRouter.get("/findById", bookController.getBookById);
+bookRouter.get("/findByName", bookController.getBookByName);
+
 module.exports = bookRouter;

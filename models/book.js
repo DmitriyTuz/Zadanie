@@ -1,3 +1,6 @@
+const {User} = require('../models/user.js')
+const {Autor} = require('../models/autor.js')
+
 module.exports = (sequelize, DateTypes) => {
 const Book = sequelize.define("book", {
   id: {
@@ -12,8 +15,11 @@ const Book = sequelize.define("book", {
   }
 });
 
+//Book.belongsTo(User)
+//Book.belongsTo(Autor)
 Book.associate = (models) => {
-  Book.belongsToMany(models.user, {through: models.vzyalotdal});
+  Book.belongsTo(models.user);
+  Book.belongsTo(models.autor);
 }
 
 return Book;

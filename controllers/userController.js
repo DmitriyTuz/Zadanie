@@ -187,17 +187,61 @@ exports.successAuth = (req, res) => {
     res.status(200).send("Welcome 🙌 ");
 };
 
-exports.getUserByFirstName = (req, res) => {
-   // db.sequelize.query(`SELECT id, first_name, last_name FROM users WHERE first_name = 'Alexandr' AND last_name = 'Poliv'`,
-   // db.sequelize.query(`SELECT id, first_name, last_name FROM users WHERE id = ${req.query.id}`,
-    db.sequelize.query(`SELECT id, first_name, last_name FROM users WHERE first_name = ${req.query.first_name} AND last_name = ${req.query.last_name} AND name IS NULL`,
-   //    db.sequelize.query(`SELECT id, first_name, last_name FROM users WHERE first_name LIKE "Al%" AND last_name LIKE "Polivan%"`,
+exports.getUserByFirstNameLastName = (req, res) => {
+
+    db.sequelize.query(`SELECT id, first_name, last_name FROM users WHERE first_name = ${req.query.first_name} AND last_name = ${req.query.last_name}`,
+
         function(err, results, fields) {
             console.log(err);
             console.log(results); // собственно данные
             console.log(fields); // мета-данные полей
         }).then(results => res.send(results));
 };
+
+exports.getUserByFirstNameLastNameLike = (req, res) => {
+
+let query = `SELECT id, first_name, last_name FROM users WHERE first_name LIKE "${req.query.first_name}%"`;
+console.log('***', query);
+//   db.sequelize.query(`SELECT id, first_name, last_name FROM users WHERE first_name LIKE 'Al/*${req.query.first_name}*/%'`,
+    db.sequelize.query(query,
+//    db.sequelize.query('SELECT id, first_name, last_name FROM users WHERE first_name LIKE "Al%"',
+        function(err, results, fields) {
+            console.log(err);
+            console.log(results); // собственно данные
+            console.log(fields); // мета-данные полей
+        }).then(results => {
+            console.log(results);
+            res.send(results)
+        }).catch(error => {
+            console.log(error);
+            res.send(error)
+         });
+};
+
+exports.getUserById = (req, res) => {
+
+     db.sequelize.query(`SELECT id, first_name, last_name FROM users WHERE id = ${req.query.id}`,
+
+        function(err, results, fields) {
+            console.log(err);
+            console.log(results); // собственно данные
+            console.log(fields); // мета-данные полей
+        }).then(results => res.send(results));
+};
+
+exports.addBookToUser = (req, res) => {
+    db.book.update(
+        {
+            name: req.body.name,
+            age: req.body.age
+        },
+        {
+            where: { id: req.body.id }
+        }
+    ).then( () => res.send("success update") );
+};
+
+
 
     // db.user.findAll({
     //     where: {

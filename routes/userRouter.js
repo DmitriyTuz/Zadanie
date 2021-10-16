@@ -17,6 +17,8 @@ userRouter.post("/register", userController.registerUser);
 userRouter.post("/login", userController.loginUser);
 userRouter.get("/welcome", auth, userController.successAuth);
 
-userRouter.get("/findByFirstName", userController.getUserByFirstName);
+userRouter.get("/findById", userController.getUserById);
+userRouter.get("/findByFirstNameLastName", userController.getUserByFirstNameLastName);
+userRouter.get("/findByFirstNameLastNameLike", userController.getUserByFirstNameLastNameLike);
 
 module.exports = userRouter;

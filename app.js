@@ -7,7 +7,7 @@ const homeRouter = require("./routes/homeRouter.js");
 const bookRouter = require("./routes/bookRouter.js");
 const autorRouter = require("./routes/autorRouter.js");
 
-const wrongRoute = require("./middleware/wrongRouter.js");
+const wrongRoute = require("./middleware/wrongRouter1.js");
 
 const db = require("./models/db");
 
@@ -17,7 +17,7 @@ const port = process.env.PORT || API_PORT;
 let User = db.user;
 let Autor = db.autor;
 let Book = db.book;
-let Vzyalotdal = db.vzyalotdal;
+
 
 console.log(1);
 
@@ -46,6 +46,8 @@ db.sequelize.sync().then(() => {
 
 app.use("/users", userRouter);
 
+console.log('мой запрос ! ', db.sequelize.query);
+
 console.log(5);
 
 //app.use("/users", homeRouter);
@@ -61,5 +63,5 @@ app.use("/autors", autorRouter);
 console.log(8);
 
 // This should be the last route else any after it won't work
-app.use("*", wrongRoute);
+app.use("*", wrongRoute.wrongRoute);
 

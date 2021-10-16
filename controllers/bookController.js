@@ -8,7 +8,7 @@ exports.getBooks = (req, res) => {
 // post new book
 exports.postBook = (req, res) => {
     db.book.create({
-       name: req.body.name
+       name: req.body.name,
     }).then(submitedBook => res.send(submitedBook));
 };
 
@@ -42,6 +42,34 @@ exports.editBook = (req, res) => {
  ).then( () => res.send("success update") );
 };
 
+exports.getBookById = (req, res) => {
 
+    db.sequelize.query(`SELECT id, name FROM books WHERE id = ${req.query.id}`,
 
+        function(err, results, fields) {
+        //    console.log(err);
+        //    console.log(results); // собственно данные
+        //    console.log(fields); // мета-данные полей
+        }).then(results => res.send(results));
+};
+
+exports.getBookByName = (req, res) => {
+
+    db.sequelize.query(`SELECT id, name FROM books WHERE name = ${req.query.name}`,
+
+        function(err, results, fields) {
+            //    console.log(err);
+            //    console.log(results); // собственно данные
+            //    console.log(fields); // мета-данные полей
+        }).then(results => res.send(results));
+};
+
+exports.getBookByUser = (req, res) => {
+
+    db.sequelize.query(`SELECT id, name FROM books WHERE id = ${req.query.id}`,
+
+        function(err, results, fields) {
+
+        }).then(results => res.send(results));
+};
 

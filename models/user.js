@@ -1,3 +1,4 @@
+const {Book} = require('../models/book.js')
 module.exports = (sequelize, DateTypes) => {
 const User = sequelize.define("user", {
   id: {
@@ -32,8 +33,9 @@ const User = sequelize.define("user", {
   },
 });
 
+//User.hasMany(Book, { onDelete: "cascade" })
 User.associate = (models) => {
-  User.belongsToMany(models.book, {through: models.vzyalotdal});
+  User.hasMany(models.book, { onDelete: "cascade" });
 }
 
 return User;

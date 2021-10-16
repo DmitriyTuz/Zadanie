@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require("express");    // оба wrongRouter работают
 const wrongRouter = express.Router();
 
 let wrongRoute = (req, res) => {

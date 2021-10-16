@@ -1,17 +1,17 @@
 const db = require("../models/db");
-// get all books
+// get all autors
 exports.getAutors = (req, res) => {
     db.autor.findAll().then(books => res.send(books));
 };
 
-// post new book
+// post new autor
 exports.postAutor = (req, res) => {
     db.autor.create({
        name: req.body.name
     }).then(submitedBook => res.send(submitedBook));
 };
 
-// get single book by id
+// get single autor by id
 exports.getAutorWithId = (req, res) => {
     db.autor.findAll({
       where: {
@@ -20,16 +20,16 @@ exports.getAutorWithId = (req, res) => {
     }).then(book => res.send(book));
 };
 
-// delete book
+// delete autor
 exports.deleteAutor = (req, res) => {
     db.autor.destroy({
     where: {
       id: req.params.id
     }
-  }).then((book) => res.send("success delete"));
+  }).then((autor) => res.send("success delete"));
 };
 
-// edit a book
+// edit a autor
 exports.editAutor = (req, res) => {
    db.autor.update(
      {

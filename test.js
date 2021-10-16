@@ -91,10 +91,10 @@ function doHomework(subject, callback) {
   console.log(`Starting my ${subject} homework`);
   callback();
 }
-function alertFinished(){
+function console.logFinished(){
   console.log('Finished my homework');
 }
-doHomework('math', alertFinished);*/
+doHomework('math', console.logFinished);*/
 
 // пример №5
 /*let numbers = [1, 2, 4, 7, 3, 5, 6];
@@ -131,8 +131,21 @@ setTimeout(function () {
   });
 }, 0);*/
 
-/*const readlineSync = require('readline-sync');
-let age = readlineSync.question('Input your age please ? ');
-console.log(`My age is ${age} years !`);*/
+"use strict";
+const readlineSync = require('readline-sync');
+// let login = readlineSync.question('Input your login : ');
+//
+//     if (login == 'Admin') {
+//       pass = readlineSync.question('Input your password : ');
+//         if (pass = 'I boss') {
+//           console.log('Hello !')
+//         } else {
+//             console.log('Wrong password !')
+//         }
+//     } else console.log('Canceled !')*/
 
-console.log("asdf\tsdga");
+console.log( parseInt('100px') ); // 100
+console.log( parseFloat('12.5em') ); // 12.5
+
+console.log( parseInt('12.3') ); // 12, вернётся только целая часть
+console.log( parseFloat('12.3.4') );
