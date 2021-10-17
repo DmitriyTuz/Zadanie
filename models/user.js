@@ -19,7 +19,7 @@ const User = sequelize.define("user", {
   },
   last_name: {
     type: DateTypes.STRING,
-    default: null
+//    default: null
   },
   email: {
     type: DateTypes.STRING,

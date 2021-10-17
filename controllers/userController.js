@@ -100,13 +100,13 @@ exports.editUser = function (req, res) {
 };*/
 
 // register User
-exports.registerUser = async (req, res) => {
+exports.register = async (req, res) => {
     try {
         // Get user input
-        const { first_name, last_name, email, password } = req.body;
+        const { name, email, password } = req.body;
 
         // Validate user input
-        if (!(email && password && first_name && last_name)) {
+        if (!(email && password && name)) {
             res.status(400).send("All input is required");
         }
 
@@ -123,8 +123,7 @@ exports.registerUser = async (req, res) => {
 
         // Create user in our database
         const user = await db.user.create({
-            first_name,
-            last_name,
+            name,
             email: email.toLowerCase(), // sanitize: convert email to lowercase
             password: encryptedPassword,
         });
@@ -148,7 +147,7 @@ exports.registerUser = async (req, res) => {
 };
 
 // login user
-exports.loginUser = async (req, res) => {
+exports.login = async (req, res) => {
     try {
         // Get user input
         const { email, password } = req.body;
@@ -229,8 +228,9 @@ exports.getUserById = (req, res) => {
         }).then(results => res.send(results));
 };
 
-exports.addBookToUser = (req, res) => {
-    db.book.update(
+/*// edit a book
+exports.editUser = (req, res) => {
+    db.user.update(
         {
             name: req.body.name,
             age: req.body.age
@@ -239,9 +239,19 @@ exports.addBookToUser = (req, res) => {
             where: { id: req.body.id }
         }
     ).then( () => res.send("success update") );
-};
+};*/
 
+exports.addBookToUser = async (req, res) => {
 
+    const book = await db.book.update({userId: req.body.userId}, {where: {id: req.body.id}})
+    return res.send("success update")
+}
+
+exports.comeBackBookFromUser = async (req, res) => {
+
+    const book = await db.book.update({userId: null}, {where: {id: req.body.id}})
+    return res.send("success update")
+}
 
     // db.user.findAll({
     //     where: {

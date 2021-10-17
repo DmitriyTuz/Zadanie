@@ -11,10 +11,13 @@ userRouter.get("/", userController.getUsers);
 userRouter.post("/create", userController.postUser);
 userRouter.get("/find/:id", userController.getUserWithId);
 userRouter.delete("/delete/:id", userController.deleteUser);
-userRouter.put("/edit", userController.editUser);
 
-userRouter.post("/register", userController.registerUser);
-userRouter.post("/login", userController.loginUser);
+userRouter.put("/edit", userController.editUser);
+userRouter.put("/addBookToUser", userController.addBookToUser);
+userRouter.put("/comeBackBookFromUser", userController.comeBackBookFromUser);
+
+userRouter.post("/register", userController.register);
+userRouter.post("/login", userController.login);
 userRouter.get("/welcome", auth, userController.successAuth);
 
 userRouter.get("/findById", userController.getUserById);
