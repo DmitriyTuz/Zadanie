@@ -15,6 +15,7 @@ userRouter.delete("/delete/:id", userController.deleteUser);
 userRouter.put("/edit", userController.editUser);
 userRouter.put("/addBookToUser", userController.addBookToUser);
 userRouter.put("/comeBackBookFromUser", userController.comeBackBookFromUser);
+userRouter.put("/addBookToAutor", userController.addBookToAutor);
 
 userRouter.post("/register", userController.register);
 userRouter.post("/login", userController.login);
@@ -23,5 +24,7 @@ userRouter.get("/welcome", auth, userController.successAuth);
 userRouter.get("/findById", userController.getUserById);
 userRouter.get("/findByFirstNameLastName", userController.getUserByFirstNameLastName);
 userRouter.get("/findByFirstNameLastNameLike", userController.getUserByFirstNameLastNameLike);
+userRouter.get("/getUsersWithBooks", userController.getUsersWithBooks);
+userRouter.get("/getUsersWithBooksAndAutor", userController.getUsersWithBooksAndAutor);
 
 module.exports = userRouter;

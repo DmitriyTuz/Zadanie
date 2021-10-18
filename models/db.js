@@ -9,7 +9,7 @@ const db = {};
 const sequelize = new Sequelize("Library", "root", "1111", {
   dialect: "mysql",
   host: "localhost",
-  logging: false,
+//  logging: false,
   define: {
     timestamps: false
   }

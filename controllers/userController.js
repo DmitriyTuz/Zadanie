@@ -242,16 +242,75 @@ exports.editUser = (req, res) => {
 };*/
 
 exports.addBookToUser = async (req, res) => {
-
-    const book = await db.book.update({userId: req.body.userId}, {where: {id: req.body.id}})
+    let {id, userId} = req.body
+    const book = await db.book.update({userId}, {where: {id}})
     return res.send("success update")
 }
 
 exports.comeBackBookFromUser = async (req, res) => {
-
-    const book = await db.book.update({userId: null}, {where: {id: req.body.id}})
+    let {id} = req.body
+    const book = await db.book.update({userId: null}, {where: {id}})
     return res.send("success update")
 }
+
+exports.addBookToAutor = async (req, res) => {
+    let {id, autorId} = req.body
+    const book = await db.book.update({autorId}, {where: {id}})
+    return res.send("success update")
+}
+
+//Users.findAll(include: [{model: Hobbies}])
+//Users.findAll(include: [{model: Hobbies, where: {hobby: 'fishing'}, required : true}])
+//include : [{model:Model.Account, attribute:['name']}]
+
+exports.getUsersWithBooks = async function(req, res) {
+    let res1 = await db.user.findAll({attributes: ["id","first_name"], include: [{model: db.book, attributes:['name']}]})
+    return res.json(res1)
+};
+
+exports.getUsersWithBooksAndAutor = async function(req, res) {
+
+    let res1 = await db.user.findAll({attributes: ["id","first_name"],
+        include: [{
+            model: db.book, attributes:["name"],
+            required: false,
+            include: [{
+                model: db.autor, attributes:["name"],
+               required: false
+            }]
+        }]
+    })
+    // let res2 = await db.book.findAll({where: {res1}}, {include: [{model: db.autor, attributes:['name']}]})
+    return res.json(res1)
+};
+
+
+/*Places.findById(req.params.id, {
+    include: [{
+        model: Reviews,
+        required: false,
+        include: [{
+            model: Users,
+            required: false
+        }]
+    }]
+}).then(function(place) {
+    // The rest of your logic here...
+});*/
+
+/*const user = await  db.User.findByid(userId, {
+    include: [{
+        model: db.Table1,
+        separate: true // обязательно указать!
+    }, {
+        model: db.Table2,
+        separate: true // обязательно указать!
+    }, {
+        model: db.Table3,
+        separate: true // обязательно указать!
+    }]
+})*/
+
 
     // db.user.findAll({
     //     where: {
